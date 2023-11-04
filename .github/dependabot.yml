@@ -8,6 +8,14 @@ updates:
     directory: "packages/mail"
     schedule:
       interval: "monthly"
+  - package-ecosystem: "pub"
+    directory: "packages/mail_aws_ses_node"
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "pub"
+    directory: "packages/mail_mailjet"
+    schedule:
+      interval: "monthly"
 
   - package-ecosystem: "github-actions"
     directory: "/"

@@ -1,8 +1,53 @@
 // TODO: Put public facing types in this file.
 
-/// Abstract mail service
-abstract class MailService {}
+import 'dart:typed_data';
 
+/// Mail message.
+class MailMessage {
+  final MailRecipient from;
+  final List<MailRecipient>? to;
+  final List<MailRecipient>? cc;
+  final List<MailRecipient>? bcc;
+  final List<MailRecipient>? replyTo;
+  final String subject;
+  final String? text;
+  final String? html;
+  final List<MailAttachment>? attachments;
+
+  MailMessage(this.replyTo,
+      {required this.from,
+      this.to,
+      this.cc,
+      this.bcc,
+      required this.subject,
+      this.text,
+      this.html,
+      this.attachments});
+}
+
+/// Abstract mail service
+abstract class MailService {
+  /// Not all services might support attachments...
+  bool get supportAttachments;
+
+  /// Send an email.
+  Future<SendMailResult> sendMail(MailMessage message);
+}
+
+/// Send mail response.
+abstract class SendMailResult {
+  String? get messageId;
+}
+
+/// Attachment.
+class MailAttachment {
+  final String mimeType;
+  final String filename;
+  final Uint8List content;
+
+  MailAttachment(
+      {required this.mimeType, required this.filename, required this.content});
+}
 /*
 // {
 // // //           "Email": "passenger@mailjet.com",
@@ -109,6 +154,8 @@ class MailAttachment  {
   late final fields = [contentType, filename, base64Content];
 }
 */
+
+/// Mail recipient.
 class MailRecipient {
   final String email;
   final String? name;
