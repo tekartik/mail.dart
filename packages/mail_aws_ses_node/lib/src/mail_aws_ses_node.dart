@@ -2,6 +2,7 @@ import 'package:tekartik_aws_ses_node/aws_ses_node.dart' as aws;
 import 'package:tekartik_mail/mail.dart';
 // ignore: implementation_imports
 import 'package:tekartik_mail/src/mixin.dart';
+import 'package:tekartik_mail_aws_ses_node/src/recipient_codec.dart';
 
 /// Service credentials.
 class AwsSesCredentials {
@@ -58,7 +59,7 @@ extension AwsMailRecipientExt on MailRecipient {
     if (name == null) {
       return email;
     } else {
-      return '$name <$email>';
+      return '${encodeName(name!)} <$email>';
     }
   }
 }
