@@ -1,6 +1,6 @@
 name: tekartik_mail
-description: Abstracy email api
-version: 0.1.0
+description: Abstract email api
+version: 0.1.1
 publish_to: none
 
 environment:

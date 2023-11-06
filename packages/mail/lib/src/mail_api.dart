@@ -14,15 +14,17 @@ class MailMessage {
   final String? html;
   final List<MailAttachment>? attachments;
 
-  MailMessage(this.replyTo,
-      {required this.from,
-      this.to,
-      this.cc,
-      this.bcc,
-      required this.subject,
-      this.text,
-      this.html,
-      this.attachments});
+  MailMessage({
+    required this.from,
+    this.to,
+    this.cc,
+    this.bcc,
+    required this.subject,
+    this.text,
+    this.html,
+    this.attachments,
+    this.replyTo,
+  });
 }
 
 /// Abstract mail service
@@ -160,5 +162,5 @@ class MailRecipient {
   final String email;
   final String? name;
 
-  MailRecipient({required this.email, required this.name});
+  MailRecipient({required this.email, this.name});
 }
