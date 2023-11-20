@@ -8,6 +8,6 @@ Tkmail API
   tekartik_mail_tk:
     git:
       url: https://github.com/tekartik/mail.dart
-      path: packages/tekartik_mail_tk
+      path: packages/mail_tk
       ref: dart3a
 ```
