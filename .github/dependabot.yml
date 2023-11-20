@@ -16,6 +16,10 @@ updates:
     directory: "packages/mail_mailjet"
     schedule:
       interval: "monthly"
+  - package-ecosystem: "pub"
+    directory: "packages/tekartik_mail_tk"
+    schedule:
+      interval: "monthly"
 
   - package-ecosystem: "github-actions"
     directory: "/"

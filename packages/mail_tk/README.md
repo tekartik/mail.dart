@@ -1,13 +1,13 @@
-## Mail API
+## Amazon Node SES
 
-Abstract mail API
+Tkmail API
 
 ## Setup
 
 ```yaml
-  tekartik_mail:
+  tekartik_mail_tk:
     git:
       url: https://github.com/tekartik/mail.dart
-      path: packages/mail
+      path: packages/tekartik_mail_tk
       ref: dart3a
 ```
