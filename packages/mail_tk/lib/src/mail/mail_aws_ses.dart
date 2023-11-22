@@ -1,4 +1,3 @@
-import 'package:tekartik_mail/mail.dart';
 // ignore: implementation_imports
 import 'package:tekartik_mail/src/mixin.dart';
 import 'package:tekartik_mail_tk/src/mail/mail.dart';
