@@ -163,4 +163,24 @@ class MailRecipient {
   final String? name;
 
   MailRecipient({required this.email, this.name});
+
+  @override
+  String toString() {
+    if (name?.isNotEmpty ?? false) {
+      return '$name <$email>';
+    } else {
+      return email;
+    }
+  }
+
+  @override
+  int get hashCode => email.hashCode + (name?.hashCode ?? 0);
+
+  @override
+  bool operator ==(Object other) {
+    if (other is MailRecipient) {
+      return email == other.email && name == other.name;
+    }
+    return false;
+  }
 }
