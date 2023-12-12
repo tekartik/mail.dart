@@ -1,4 +1,3 @@
-import 'package:tekartik_mail/mail.dart';
 import 'package:tekartik_mail/utils/mail_utils.dart';
 import 'package:test/test.dart';
 
