@@ -11,22 +11,31 @@ import 'tkmail_models.dart';
 /// To set before creating the client.
 var debugTkmailApi = false;
 
+void _log(Object? message) {
+  // ignore: avoid_print
+  print(message);
+}
+
 /// The main client
 abstract class TkmailClient {
+  /// The uri
   Uri get uri;
   final _debug = debugTkmailApi;
   late final http.Client _client;
 
+  /// Constructor
   TkmailClient({http.Client? client}) {
     _client = client ?? http.Client();
     initTkmailBuilders();
   }
 
+  /// Send a request
   Future<Map> send(Uri uri, Map request) async {
     var body = jsonEncode(request);
     if (_debug) {
-      print('send: $uri');
-      print('      $body');
+      // ignore: avoid_print
+      _log('send: $uri');
+      _log('      $body');
     }
     var resultText = await httpClientRead(_client, httpMethodPost, uri,
         headers: {
@@ -34,7 +43,7 @@ abstract class TkmailClient {
         },
         body: body);
     if (_debug) {
-      print('recv: $resultText');
+      _log('recv: $resultText');
     }
     return jsonDecode(resultText) as Map;
   }

@@ -13,6 +13,8 @@ import 'tkmail_models.dart';
 class TkmailClientAwsSes extends TkmailClient {
   @override
   final Uri uri;
+
+  /// Constructor
   TkmailClientAwsSes({super.client, required this.uri}) {
     initTkmailAwsSesBuilders();
   }
