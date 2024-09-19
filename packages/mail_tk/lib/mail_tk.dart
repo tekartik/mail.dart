@@ -10,4 +10,5 @@ export 'src/tkmail_models.dart'
         ApiMailAttachment,
         ApiMailMessage,
         ApiMailRecipient,
-        initTkmailBuilders;
+        initTkmailBuilders,
+        ApiMailRecipientExt;
