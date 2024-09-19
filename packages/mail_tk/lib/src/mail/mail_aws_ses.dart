@@ -1,7 +1,6 @@
-// ignore: implementation_imports
-import 'package:tekartik_mail/src/mixin.dart';
+import 'package:tekartik_mail/mail_mixin.dart';
 import 'package:tekartik_mail_tk/mail_tk_aws_ses.dart';
-import 'package:tekartik_mail_tk/src/mail/mail.dart';
+
 import 'package:tekartik_mail_tk/src/tkmail_models_aws_ses.dart';
 
 /// Service credentials.
@@ -38,10 +37,6 @@ class TkmailAwsSesMailService with MailServiceMixin implements MailService {
   /// AWS SES client.
   final TkmailClientAwsSes client;
 
-  /// Attachments are not supported.
-  @override
-  bool get supportAttachments => true;
-
   /// Constructor.
   TkmailAwsSesMailService({required this.client, required this.options});
 
@@ -53,18 +48,7 @@ class TkmailAwsSesMailService with MailServiceMixin implements MailService {
         ..credentials.v = (ApiCredentialsAwsSes()
           ..accessKeyId.v = options.credentials.accessKeyId
           ..secretAccessKey.v = options.credentials.secretAccessKey))
-      ..message.v = (ApiMailMessage()
-        ..subject.v = message.subject
-        ..from.v = message.from.toApiMailRecipient()
-        ..to.v = message.to?.map((e) => e.toApiMailRecipient()).toList()
-        ..cc.v = message.cc?.map((e) => e.toApiMailRecipient()).toList()
-        ..bcc.v = message.bcc?.map((e) => e.toApiMailRecipient()).toList()
-        ..replyTo.v =
-            message.replyTo?.map((e) => e.toApiMailRecipient()).toList()
-        ..html.v = message.html
-        ..text.v = message.text
-        ..attachments.v =
-            message.attachments?.map((e) => e.toApiMailAttachment()).toList());
+      ..message.v = message.toApiMailMessage();
 
     var response = await client.sendEmail(request);
 

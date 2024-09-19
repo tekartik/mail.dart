@@ -23,7 +23,7 @@ class ApiCredentialsAwsSes extends CvModelBase {
   late final secretAccessKey = CvField<String>('secretAccessKey');
 
   @override
-  List<CvField<Object?>> get fields => [accessKeyId, secretAccessKey];
+  CvFields get fields => [accessKeyId, secretAccessKey];
 }
 
 /// Service for AWS SES
@@ -35,7 +35,7 @@ class ApiServiceAwsSes extends CvModelBase {
   late final region = CvField<String>('region');
 
   @override
-  List<CvField<Object?>> get fields => [credentials, region];
+  CvFields get fields => [credentials, region];
 }
 
 /// Request to send mail
@@ -44,5 +44,5 @@ class ApiSendMailRequestAwsSes extends ApiSendMailRequest {
   late final service = CvModelField<ApiServiceAwsSes>('service');
 
   @override
-  List<CvField<Object?>> get fields => [service, ...super.fields];
+  CvFields get fields => [service, ...super.fields];
 }

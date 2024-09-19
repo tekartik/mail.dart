@@ -4,6 +4,29 @@ import 'package:tekartik_mail/mail.dart';
 // ignore: implementation_imports
 import 'package:tekartik_mail_tk/src/tkmail_models.dart';
 
+/// Api extension on ApiMailRecipient
+extension ApiMailRecipientExt on ApiMailRecipient {
+  /// Convert to mail recipient
+  MailRecipient toMailRecipient() {
+    return MailRecipient(email: email.v!, name: name.v);
+  }
+}
+
+/// Api extension on MailMessage
+extension MailMessageApiExt on MailMessage {
+  /// Convert to api mail message
+  ApiMailMessage toApiMailMessage() => ApiMailMessage()
+    ..subject.v = subject
+    ..from.v = from?.toApiMailRecipient()
+    ..to.v = to?.map((e) => e.toApiMailRecipient()).toList()
+    ..cc.v = cc?.map((e) => e.toApiMailRecipient()).toList()
+    ..bcc.v = bcc?.map((e) => e.toApiMailRecipient()).toList()
+    ..replyTo.v = replyTo?.map((e) => e.toApiMailRecipient()).toList()
+    ..html.v = html
+    ..text.v = text
+    ..attachments.v = attachments?.map((e) => e.toApiMailAttachment()).toList();
+}
+
 /// Api extension on MailRecipient
 extension MailRecipientApiExt on MailRecipient {
   /// Convert to api mail recipient
@@ -15,7 +38,7 @@ extension MailRecipientApiExt on MailRecipient {
 }
 
 /// Api extension on MailAttachment
-extension MailAttachmentExt on MailAttachment {
+extension MailAttachmentApiExt on MailAttachment {
   /// Convert to api mail attachment
   ApiMailAttachment toApiMailAttachment() {
     return ApiMailAttachment()

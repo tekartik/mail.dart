@@ -1,5 +1,4 @@
 import 'package:cv/cv.dart';
-import 'package:tekartik_mail/mail.dart';
 
 var _builderInitialized = false;
 
@@ -21,7 +20,7 @@ class ApiSendMailResponse extends CvModelBase {
   late final messageId = CvField<String>('messageId');
 
   @override
-  List<CvField<Object?>> get fields => [messageId];
+  CvFields get fields => [messageId];
 }
 
 /// Request to send mail
@@ -30,7 +29,7 @@ class ApiSendMailRequest extends CvModelBase {
   late final message = CvModelField<ApiMailMessage>('message');
 
   @override
-  List<CvField<Object?>> get fields => [message];
+  CvFields get fields => [message];
 }
 
 /// Mail message
@@ -98,12 +97,4 @@ class ApiMailRecipient extends CvModelBase {
   late final name = CvField<String>('name');
   @override
   late final fields = [email, name];
-}
-
-/// Api extension on ApiMailRecipient
-extension ApiMailRecipientExt on ApiMailRecipient {
-  /// Convert to mail recipient
-  MailRecipient toMailRecipient() {
-    return MailRecipient(email: email.v!, name: name.v);
-  }
 }

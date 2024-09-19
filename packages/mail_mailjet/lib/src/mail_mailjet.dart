@@ -21,7 +21,7 @@ class MailjetMailService with MailServiceMixin implements MailService {
       ..messages.v = [
         mailjet.CvMailjetMessage()
           ..subject.v = message.subject
-          ..from.v = message.from.toMailjetRecipient()
+          ..from.v = message.from!.toMailjetRecipient()
           ..to.v = message.to?.map((e) => e.toMailjetRecipient()).toList()
           ..cc.v = message.cc?.map((e) => e.toMailjetRecipient()).toList()
           ..bcc.v = message.bcc?.map((e) => e.toMailjetRecipient()).toList()

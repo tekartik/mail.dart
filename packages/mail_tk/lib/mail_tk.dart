@@ -2,6 +2,14 @@
 library;
 
 export 'package:tekartik_mail/mail.dart';
+
+export 'src/mail/mail_api.dart'
+    show
+        SendMailResultFromApi,
+        MailAttachmentApiExt,
+        MailMessageApiExt,
+        MailRecipientApiExt,
+        ApiMailRecipientExt;
 export 'src/tkmail_client.dart' show TkmailClient, debugTkmailApi;
 export 'src/tkmail_models.dart'
     show
@@ -10,5 +18,4 @@ export 'src/tkmail_models.dart'
         ApiMailAttachment,
         ApiMailMessage,
         ApiMailRecipient,
-        initTkmailBuilders,
-        ApiMailRecipientExt;
+        initTkmailBuilders;

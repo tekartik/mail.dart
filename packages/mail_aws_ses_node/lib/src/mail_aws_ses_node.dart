@@ -41,7 +41,7 @@ class AwsSesMailService with MailServiceMixin implements MailService {
   Future<SendMailResult> sendMail(MailMessage message) async {
     var client = _initClient();
     var response = await client.sendMail(aws.AwsSesMessage(
-      from: message.from.toAwsRecipient(),
+      from: message.from!.toAwsRecipient(),
       to: message.to?.map((e) => e.toAwsRecipient()).toList(),
       cc: message.cc?.map((e) => e.toAwsRecipient()).toList(),
       bcc: message.bcc?.map((e) => e.toAwsRecipient()).toList(),

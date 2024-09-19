@@ -4,7 +4,7 @@ import 'dart:typed_data';
 
 /// Mail message.
 class MailMessage {
-  final MailRecipient from;
+  final MailRecipient? from;
   final List<MailRecipient>? to;
   final List<MailRecipient>? cc;
   final List<MailRecipient>? bcc;
@@ -61,7 +61,7 @@ class CvMailjetRecipientResponse extends CvModelBase {
   late final messageId = CvField<String>('MessageID');
   late final messageHref = CvField<String>('MessageHref');
   @override
-  List<CvField<Object?>> get fields => [email, messageId, messageHref];
+  CvFields get fields => [email, messageId, messageHref];
 }
 
 //curl -s \
@@ -92,7 +92,7 @@ class CvMailjetSendEmailRequest extends CvModelBase {
   late final messages = CvModelListField<CvMailjetMessage>('Messages');
 
   @override
-  List<CvField<Object?>> get fields => [messages];
+  CvFields get fields => [messages];
 }
 
 // {
