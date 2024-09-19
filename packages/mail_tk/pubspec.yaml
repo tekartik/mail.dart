@@ -8,7 +8,7 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  cv: '>=0.2.14'
+  cv: '>=1.1.0'
   path:
   tekartik_http:
     git:

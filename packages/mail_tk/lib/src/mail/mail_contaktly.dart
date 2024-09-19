@@ -1,3 +1,4 @@
+import 'package:cv/cv.dart';
 import 'package:tekartik_mail/mail_mixin.dart';
 import 'package:tekartik_mail_tk/mail_tk_contaklty.dart';
 import 'package:tekartik_mail_tk/src/constants_contaktly.dart';
@@ -37,13 +38,17 @@ class TkmailContaktlyMailService with MailServiceMixin implements MailService {
       ..command.v = commandContaktlyGetTimestamp;
     var timestamp =
         (await client.getTimestamp(getTimestampRequest)).timestamp.v!;
+    var query = ApiSendMailQueryContaktly()
+      ..serviceId.v = options.serviceId
+      ..timestamp.v = timestamp
+      ..message.v = message.toApiMailMessage();
+    query.enc.v = options.encode(options.encPaths
+        .map((path) => query.valueAtPath(keyPartsFromString(path)))
+        .toList());
     var request = ApiSendMailRequestContaktly()
       ..app.v = client.app
       ..command.v = commandContaktlySendEmail
-      ..query.v = (ApiSendMailQueryContaktly()
-        ..serviceId.v = options.serviceId
-        ..timestamp.v = timestamp
-        ..message.v = message.toApiMailMessage());
+      ..query.v = query;
 
     var response = await client.sendEmail(request);
 
