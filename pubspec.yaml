@@ -1,0 +1,9 @@
+name: _
+publish_to: none
+environment:
+  sdk: ^3.6.0
+workspace:
+  - packages/mail
+  - packages/mail_aws_ses_node
+  - packages/mail_mailjet
+  - packages/mail_tk
