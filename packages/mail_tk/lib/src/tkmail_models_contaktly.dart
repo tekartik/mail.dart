@@ -18,7 +18,7 @@ void initTkmailContaktlyBuilders() {
       ApiGetTimestampRequestContaktly.new,
       ApiGetTimestampResponseContaktly.new,
       ApiGetTimestampResultContaktly.new,
-      ApiErrorContaktly.new
+      ApiErrorContaktly.new,
     ]);
     initTkmailBuilders();
   }

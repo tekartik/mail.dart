@@ -24,7 +24,8 @@ class TkmailClientAwsSes extends TkmailClient {
 
   /// The main way to send an email
   Future<ApiSendMailResponse> sendEmail(
-      ApiSendMailRequestAwsSes request) async {
+    ApiSendMailRequestAwsSes request,
+  ) async {
     var result = await send(_sendMailUri, request.toMap());
     return result.cv<ApiSendMailResponse>();
   }

@@ -70,7 +70,7 @@ class ApiMailMessage extends CvModelBase {
     text,
     html,
     attachments,
-    replyTo
+    replyTo,
   ];
 }
 

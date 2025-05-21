@@ -15,7 +15,8 @@ class TkmailClientContaktly extends TkmailClient {
 
   /// The main way to send an email
   Future<ApiSendMailResponse> sendEmail(
-      ApiSendMailRequestContaktly request) async {
+    ApiSendMailRequestContaktly request,
+  ) async {
     var response = await send(uri, request.toMap());
     var responseContaktly = response.cv<ApiSendMailResponseContaktly>();
     if (responseContaktly.error.isNotNull) {
@@ -27,7 +28,8 @@ class TkmailClientContaktly extends TkmailClient {
 
   /// The main way to send an email
   Future<ApiGetTimestampResultContaktly> getTimestamp(
-      ApiGetTimestampRequestContaktly request) async {
+    ApiGetTimestampRequestContaktly request,
+  ) async {
     var response = await send(uri, request.toMap());
     var responseContaktly = response.cv<ApiGetTimestampResponseContaktly>();
     if (responseContaktly.error.isNotNull) {

@@ -28,10 +28,12 @@ class AwsSesMailService with MailServiceMixin implements MailService {
 
   aws.AwsSesClient _initClient() {
     _client ??= _awsSes.sesClient(
-        region: options.region,
-        credentials: aws.AwsCredentials(
-            accessKeyId: options.credentials.accessKeyId,
-            secretAccessKey: options.credentials.secretAccessKey));
+      region: options.region,
+      credentials: aws.AwsCredentials(
+        accessKeyId: options.credentials.accessKeyId,
+        secretAccessKey: options.credentials.secretAccessKey,
+      ),
+    );
     return _client!;
   }
 
@@ -40,16 +42,18 @@ class AwsSesMailService with MailServiceMixin implements MailService {
   @override
   Future<SendMailResult> sendMail(MailMessage message) async {
     var client = _initClient();
-    var response = await client.sendMail(aws.AwsSesMessage(
-      from: message.from!.toAwsRecipient(),
-      to: message.to?.map((e) => e.toAwsRecipient()).toList(),
-      cc: message.cc?.map((e) => e.toAwsRecipient()).toList(),
-      bcc: message.bcc?.map((e) => e.toAwsRecipient()).toList(),
-      html: message.html?.toAwsSesContent(),
-      text: message.text?.toAwsSesContent(),
-      subject: message.subject.toAwsSesContent(),
-      replyTo: message.replyTo?.map((e) => e.toAwsRecipient()).toList(),
-    ));
+    var response = await client.sendMail(
+      aws.AwsSesMessage(
+        from: message.from!.toAwsRecipient(),
+        to: message.to?.map((e) => e.toAwsRecipient()).toList(),
+        cc: message.cc?.map((e) => e.toAwsRecipient()).toList(),
+        bcc: message.bcc?.map((e) => e.toAwsRecipient()).toList(),
+        html: message.html?.toAwsSesContent(),
+        text: message.text?.toAwsSesContent(),
+        subject: message.subject.toAwsSesContent(),
+        replyTo: message.replyTo?.map((e) => e.toAwsRecipient()).toList(),
+      ),
+    );
     return SendMailResultSes(response);
   }
 }

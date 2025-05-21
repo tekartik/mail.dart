@@ -37,11 +37,13 @@ abstract class TkmailClient {
       _log('send: $uri');
       _log('      $body');
     }
-    var resultText = await httpClientRead(_client, httpMethodPost, uri,
-        headers: {
-          httpHeaderContentType: httpContentTypeJson,
-        },
-        body: body);
+    var resultText = await httpClientRead(
+      _client,
+      httpMethodPost,
+      uri,
+      headers: {httpHeaderContentType: httpContentTypeJson},
+      body: body,
+    );
     if (_debug) {
       _log('recv: $resultText');
     }

@@ -14,13 +14,13 @@ void main() {
       'message': {
         'from': {'email': 'text_1', 'name': 'text_2'},
         'to': [
-          {'email': 'text_3', 'name': 'text_4'}
+          {'email': 'text_3', 'name': 'text_4'},
         ],
         'cc': [
-          {'email': 'text_5', 'name': 'text_6'}
+          {'email': 'text_5', 'name': 'text_6'},
         ],
         'bcc': [
-          {'email': 'text_7', 'name': 'text_8'}
+          {'email': 'text_7', 'name': 'text_8'},
         ],
         'subject': 'text_9',
         'text': 'text_10',
@@ -29,15 +29,16 @@ void main() {
           {
             'mimeType': 'text_12',
             'filename': 'text_13',
-            'base64Content': 'text_14'
-          }
+            'base64Content': 'text_14',
+          },
         ],
         'replyTo': [
-          {'email': 'text_15', 'name': 'text_16'}
-        ]
-      }
+          {'email': 'text_15', 'name': 'text_16'},
+        ],
+      },
     });
-    expect((ApiSendMailResponse()..fillModel(apiFillOptions)).toMap(),
-        {'messageId': 'text_1'});
+    expect((ApiSendMailResponse()..fillModel(apiFillOptions)).toMap(), {
+      'messageId': 'text_1',
+    });
   });
 }

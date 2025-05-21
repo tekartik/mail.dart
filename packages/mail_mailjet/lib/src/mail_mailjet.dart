@@ -17,19 +17,22 @@ class MailjetMailService with MailServiceMixin implements MailService {
 
   @override
   Future<SendMailResult> sendMail(MailMessage message) async {
-    var request = mailjet.CvMailjetSendEmailRequest()
-      ..messages.v = [
-        mailjet.CvMailjetMessage()
-          ..subject.v = message.subject
-          ..from.v = message.from!.toMailjetRecipient()
-          ..to.v = message.to?.map((e) => e.toMailjetRecipient()).toList()
-          ..cc.v = message.cc?.map((e) => e.toMailjetRecipient()).toList()
-          ..bcc.v = message.bcc?.map((e) => e.toMailjetRecipient()).toList()
-          ..htmlPart.v = message.html
-          ..textPart.v = message.text
-          ..attachments.v =
-              message.attachments?.map((e) => e.toMailjetAttachment()).toList()
-      ];
+    var request =
+        mailjet.CvMailjetSendEmailRequest()
+          ..messages.v = [
+            mailjet.CvMailjetMessage()
+              ..subject.v = message.subject
+              ..from.v = message.from!.toMailjetRecipient()
+              ..to.v = message.to?.map((e) => e.toMailjetRecipient()).toList()
+              ..cc.v = message.cc?.map((e) => e.toMailjetRecipient()).toList()
+              ..bcc.v = message.bcc?.map((e) => e.toMailjetRecipient()).toList()
+              ..htmlPart.v = message.html
+              ..textPart.v = message.text
+              ..attachments.v =
+                  message.attachments
+                      ?.map((e) => e.toMailjetAttachment())
+                      .toList(),
+          ];
 
     var response = await client.sendEmail(request);
 
