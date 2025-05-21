@@ -47,8 +47,11 @@ class MailAttachment {
   final String filename;
   final Uint8List content;
 
-  MailAttachment(
-      {required this.mimeType, required this.filename, required this.content});
+  MailAttachment({
+    required this.mimeType,
+    required this.filename,
+    required this.content,
+  });
 }
 /*
 // {
