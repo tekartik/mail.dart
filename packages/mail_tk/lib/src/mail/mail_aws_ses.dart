@@ -46,17 +46,13 @@ class TkmailAwsSesMailService with MailServiceMixin implements MailService {
 
   @override
   Future<SendMailResult> sendMail(MailMessage message) async {
-    var request =
-        ApiSendMailRequestAwsSes()
-          ..service.v =
-              (ApiServiceAwsSes()
-                ..region.v = options.region
-                ..credentials.v =
-                    (ApiCredentialsAwsSes()
-                      ..accessKeyId.v = options.credentials.accessKeyId
-                      ..secretAccessKey.v =
-                          options.credentials.secretAccessKey))
-          ..message.v = message.toApiMailMessage();
+    var request = ApiSendMailRequestAwsSes()
+      ..service.v = (ApiServiceAwsSes()
+        ..region.v = options.region
+        ..credentials.v = (ApiCredentialsAwsSes()
+          ..accessKeyId.v = options.credentials.accessKeyId
+          ..secretAccessKey.v = options.credentials.secretAccessKey))
+      ..message.v = message.toApiMailMessage();
 
     var response = await client.sendEmail(request);
 

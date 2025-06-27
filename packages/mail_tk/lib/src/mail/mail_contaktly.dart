@@ -36,27 +36,25 @@ class TkmailContaktlyMailService with MailServiceMixin implements MailService {
 
   @override
   Future<SendMailResult> sendMail(MailMessage message) async {
-    var getTimestampRequest =
-        ApiGetTimestampRequestContaktly()
-          ..app.v = client.app
-          ..command.v = commandContaktlyGetTimestamp;
-    var timestamp =
-        (await client.getTimestamp(getTimestampRequest)).timestamp.v!;
-    var query =
-        ApiSendMailQueryContaktly()
-          ..serviceId.v = options.serviceId
-          ..timestamp.v = timestamp
-          ..message.v = message.toApiMailMessage();
+    var getTimestampRequest = ApiGetTimestampRequestContaktly()
+      ..app.v = client.app
+      ..command.v = commandContaktlyGetTimestamp;
+    var timestamp = (await client.getTimestamp(
+      getTimestampRequest,
+    )).timestamp.v!;
+    var query = ApiSendMailQueryContaktly()
+      ..serviceId.v = options.serviceId
+      ..timestamp.v = timestamp
+      ..message.v = message.toApiMailMessage();
     query.enc.v = options.encode(
       options.encPaths
           .map((path) => query.valueAtPath(keyPartsFromString(path)))
           .toList(),
     );
-    var request =
-        ApiSendMailRequestContaktly()
-          ..app.v = client.app
-          ..command.v = commandContaktlySendEmail
-          ..query.v = query;
+    var request = ApiSendMailRequestContaktly()
+      ..app.v = client.app
+      ..command.v = commandContaktlySendEmail
+      ..query.v = query;
 
     var response = await client.sendEmail(request);
 

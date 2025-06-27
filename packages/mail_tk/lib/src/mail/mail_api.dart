@@ -15,18 +15,16 @@ extension ApiMailRecipientExt on ApiMailRecipient {
 /// Api extension on MailMessage
 extension MailMessageApiExt on MailMessage {
   /// Convert to api mail message
-  ApiMailMessage toApiMailMessage() =>
-      ApiMailMessage()
-        ..subject.v = subject
-        ..from.v = from?.toApiMailRecipient()
-        ..to.v = to?.map((e) => e.toApiMailRecipient()).toList()
-        ..cc.v = cc?.map((e) => e.toApiMailRecipient()).toList()
-        ..bcc.v = bcc?.map((e) => e.toApiMailRecipient()).toList()
-        ..replyTo.v = replyTo?.map((e) => e.toApiMailRecipient()).toList()
-        ..html.v = html
-        ..text.v = text
-        ..attachments.v =
-            attachments?.map((e) => e.toApiMailAttachment()).toList();
+  ApiMailMessage toApiMailMessage() => ApiMailMessage()
+    ..subject.v = subject
+    ..from.v = from?.toApiMailRecipient()
+    ..to.v = to?.map((e) => e.toApiMailRecipient()).toList()
+    ..cc.v = cc?.map((e) => e.toApiMailRecipient()).toList()
+    ..bcc.v = bcc?.map((e) => e.toApiMailRecipient()).toList()
+    ..replyTo.v = replyTo?.map((e) => e.toApiMailRecipient()).toList()
+    ..html.v = html
+    ..text.v = text
+    ..attachments.v = attachments?.map((e) => e.toApiMailAttachment()).toList();
 }
 
 /// Api extension on MailRecipient
