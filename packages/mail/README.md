@@ -9,5 +9,4 @@ Abstract mail API
     git:
       url: https://github.com/tekartik/mail.dart
       path: packages/mail
-      ref: dart3a
 ```

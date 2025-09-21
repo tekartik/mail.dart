@@ -13,5 +13,4 @@ Follow [Tekartik git versioning system](https://github.com/tekartik/common.dart/
     git:
       url: https://github.com/tekartik/mail.dart
       path: packages/mail_aws_ses_node
-      ref: dart3a
 ```

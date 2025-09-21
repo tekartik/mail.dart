@@ -9,5 +9,4 @@ Mail API on AWS SES (node)
     git:
       url: https://github.com/tekartik/mail.dart
       path: packages/mail_aws_ses_node
-      ref: dart3a
 ```

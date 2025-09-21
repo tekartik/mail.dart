@@ -9,6 +9,5 @@ Tkmail API
     git:
       url: https://github.com/tekartik/mail.dart
       path: packages/mail_tk
-      ref: dart3a
       version: '>1.0.1'
 ```

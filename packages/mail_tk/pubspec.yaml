@@ -14,20 +14,17 @@ dependencies:
     git:
       url: https://github.com/tekartik/http.dart
       path: http
-      ref: dart3a
     version: '>=0.5.5'
   tekartik_mail:
     git:
       url: https://github.com/tekartik/mail.dart
       path: packages/mail
-      ref: dart3a
 
 dev_dependencies:
   lints: ">=5.0.0"
   tekartik_lints:
     git:
       url: https://github.com/tekartik/common.dart
-      ref: dart3a
       path: packages/lints
   test: ">=1.24.0"
 resolution: workspace

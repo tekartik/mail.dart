@@ -12,13 +12,11 @@ dependencies:
     git:
       url: https://github.com/tekartik/amazon_node.dart
       path: packages/aws_ses_node
-      ref: dart3a
     version: '>=0.1.2'
   tekartik_mail:
     git:
       url: https://github.com/tekartik/mail.dart
       path: packages/mail
-      ref: dart3a
     version: '>=0.1.1'
 dev_dependencies:
   lints: ">=5.0.0"
