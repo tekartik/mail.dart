@@ -4,16 +4,34 @@ import 'dart:typed_data';
 
 /// Mail message.
 class MailMessage {
+  /// From recipient.
   final MailRecipient? from;
+
+  /// To recipients.
   final List<MailRecipient>? to;
+
+  /// Cc recipients.
   final List<MailRecipient>? cc;
+
+  /// Bcc recipients.
   final List<MailRecipient>? bcc;
+
+  /// Reply-to recipients.
   final List<MailRecipient>? replyTo;
+
+  /// Subject.
   final String subject;
+
+  /// Text body.
   final String? text;
+
+  /// HTML body.
   final String? html;
+
+  /// Attachments.
   final List<MailAttachment>? attachments;
 
+  /// Mail message.
   MailMessage({
     required this.from,
     this.to,
@@ -38,15 +56,22 @@ abstract class MailService {
 
 /// Send mail response.
 abstract class SendMailResult {
+  /// Message ID.
   String? get messageId;
 }
 
 /// Attachment.
 class MailAttachment {
+  /// Mime type.
   final String mimeType;
+
+  /// Filename.
   final String filename;
+
+  /// Content.
   final Uint8List content;
 
+  /// Attachment.
   MailAttachment({
     required this.mimeType,
     required this.filename,
@@ -162,9 +187,13 @@ class MailAttachment  {
 
 /// Mail recipient.
 class MailRecipient {
+  /// Email address.
   final String email;
+
+  /// Name.
   final String? name;
 
+  /// Mail recipient.
   MailRecipient({required this.email, this.name});
 
   @override

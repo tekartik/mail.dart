@@ -7,12 +7,14 @@ import 'package:tekartik_mailjet/mailjet.dart' as mailjet;
 
 /// Reply to not supported yet.
 class MailjetMailService with MailServiceMixin implements MailService {
+  /// Mailjet client.
   final mailjet.MailjetClient client;
 
   /// Attachments are supported.
   @override
   bool get supportAttachments => true;
 
+  /// Mailjet mail service.
   MailjetMailService({required this.client});
 
   @override
@@ -38,7 +40,9 @@ class MailjetMailService with MailServiceMixin implements MailService {
   }
 }
 
+/// Mailjet recipient extension.
 extension MailjetRecipientExt on MailRecipient {
+  /// Convert to Mailjet recipient.
   mailjet.CvMailjetRecipient toMailjetRecipient() {
     return mailjet.CvMailjetRecipient()
       ..email.v = email
@@ -46,7 +50,9 @@ extension MailjetRecipientExt on MailRecipient {
   }
 }
 
+/// Mailjet attachment extension.
 extension MailjetAttachmentExt on MailAttachment {
+  /// Convert to Mailjet attachment.
   mailjet.CvMailjetAttachment toMailjetAttachment() {
     return mailjet.CvMailjetAttachment()
       ..base64Content.v = base64Encode(content)
@@ -55,9 +61,12 @@ extension MailjetAttachmentExt on MailAttachment {
   }
 }
 
+/// Send mail result for Mailjet.
 class SendMailResultMailjet implements SendMailResult {
+  /// Mailjet response.
   final mailjet.CvMailjetSendEmailResponse response;
 
+  /// Send mail result for Mailjet.
   SendMailResultMailjet(this.response);
 
   @override

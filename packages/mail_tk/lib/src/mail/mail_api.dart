@@ -48,6 +48,18 @@ extension MailAttachmentApiExt on MailAttachment {
   }
 }
 
+/// Api extension on ApiMailAttachment
+extension ApiMailAttachmentExt on ApiMailAttachment {
+  /// Convert to mail attachment
+  MailAttachment toMailAttachment() {
+    return MailAttachment(
+      mimeType: contentType.v!,
+      filename: filename.v!,
+      content: base64Decode(base64Content.v!),
+    );
+  }
+}
+
 /// Send mail result from api
 class SendMailResultFromApi implements SendMailResult {
   /// Api response

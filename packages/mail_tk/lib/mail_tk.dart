@@ -7,6 +7,7 @@ export 'src/mail/mail_api.dart'
     show
         SendMailResultFromApi,
         MailAttachmentApiExt,
+        ApiMailAttachmentExt,
         MailMessageApiExt,
         MailRecipientApiExt,
         ApiMailRecipientExt;
