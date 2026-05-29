@@ -20,6 +20,7 @@ class TkmailClientContaktly extends TkmailClient {
     var response = await send(uri, request.toMap());
     var responseContaktly = response.cv<ApiSendMailResponseContaktly>();
     if (responseContaktly.error.isNotNull) {
+      // ignore: only_throw_errors
       throw responseContaktly.error.v!;
     }
     return ApiSendMailResponse()
@@ -33,6 +34,7 @@ class TkmailClientContaktly extends TkmailClient {
     var response = await send(uri, request.toMap());
     var responseContaktly = response.cv<ApiGetTimestampResponseContaktly>();
     if (responseContaktly.error.isNotNull) {
+      // ignore: only_throw_errors
       throw responseContaktly.error.v!;
     }
     return responseContaktly.result.v!;
