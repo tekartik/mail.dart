@@ -4,6 +4,7 @@ environment:
   sdk: ^3.12.0
 workspace:
   - packages/mail
+  - packages/mail_aws_ses
   - packages/mail_aws_ses_node
   - packages/mail_mailjet
   - packages/mail_tk
