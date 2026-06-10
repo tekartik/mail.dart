@@ -164,5 +164,5 @@ class SendMailResultAwsSes implements SendMailResult {
   SendMailResultAwsSes(this.messageId);
 
   @override
-  String toString() => 'SendMailResultAws($messageId)';
+  String toString() => 'SendMailResultAwsSes($messageId)';
 }
