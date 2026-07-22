@@ -6,10 +6,15 @@ var _builderInitialized = false;
 void initTkmailBuilders() {
   if (!_builderInitialized) {
     _builderInitialized = true;
+
     cvAddConstructor(ApiSendMailResponse.new);
+
     cvAddConstructor(ApiSendMailRequest.new);
+
     cvAddConstructor(ApiMailMessage.new);
+
     cvAddConstructor(ApiMailRecipient.new);
+
     cvAddConstructor(ApiMailAttachment.new);
   }
 }

@@ -26,6 +26,7 @@ abstract class TkmailClient {
   /// Constructor
   TkmailClient({http.Client? client}) {
     _client = client ?? http.Client();
+
     initTkmailBuilders();
   }
 
@@ -47,6 +48,7 @@ abstract class TkmailClient {
     if (_debug) {
       _log('recv: $resultText');
     }
+
     return jsonDecode(resultText) as Map;
   }
 

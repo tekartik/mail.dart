@@ -74,6 +74,7 @@ class AwsSesMailService with MailServiceMixin implements MailService {
             .toList(),
       ),
     );
+
     return SendMailResultSes(response);
   }
 }

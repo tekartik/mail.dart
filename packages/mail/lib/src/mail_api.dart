@@ -85,6 +85,7 @@ class MailAttachment {
 // // //           "MessageID": "1234567890987654321",
 // // //           "MessageHref": "https://api.mailjet.com/v3/message/1234567890987654321"
 // // //         }
+/// Class representing [CvMailjetRecipientResponse].
 class CvMailjetRecipientResponse extends CvModelBase {
   late final email = CvField<String>('Email');
   late final messageId = CvField<String>('MessageID');
@@ -117,6 +118,7 @@ class CvMailjetRecipientResponse extends CvModelBase {
 // 				}
 // 		]
 // 	}'
+/// Class representing [CvMailjetSendEmailRequest].
 class CvMailjetSendEmailRequest extends CvModelBase {
   late final messages = CvModelListField<CvMailjetMessage>('Messages');
 
@@ -148,6 +150,7 @@ class CvMailjetSendEmailRequest extends CvModelBase {
 // 								}
 // 						]
 // // 				}
+/// Class representing [CvMailjetMessage].
 class CvMailjetMessage extends CvModelBase {
   late final from = CvModelField<CvMailjetRecipient>('From');
   late final to = CvModelListField<CvMailjetRecipient>('To');
@@ -177,6 +180,7 @@ class CvMailjetMessage extends CvModelBase {
 // 										"Base64Content": "VGhpcyBpcyB5b3VyIGF0dGFjaGVkIGZpbGUhISEK"
 // 								}
 // 						]
+/// Class representing [MailAttachment].
 class MailAttachment  {
   final String mimeType = CvField<String>('ContentType');
   late final filename = CvField<String>('Filename');

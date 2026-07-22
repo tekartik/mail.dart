@@ -7,7 +7,9 @@ var _builderInitialized = false;
 void initTkmailContaktlyBuilders() {
   if (!_builderInitialized) {
     _builderInitialized = true;
+
     cvAddConstructor(ApiCredentialsAwsSes.new);
+
     cvAddConstructor(ApiServiceAwsSes.new);
 
     cvAddConstructors([
@@ -20,6 +22,7 @@ void initTkmailContaktlyBuilders() {
       ApiGetTimestampResultContaktly.new,
       ApiErrorContaktly.new,
     ]);
+
     initTkmailBuilders();
   }
 }

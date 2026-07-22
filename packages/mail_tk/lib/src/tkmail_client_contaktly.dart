@@ -23,6 +23,7 @@ class TkmailClientContaktly extends TkmailClient {
       // ignore: only_throw_errors
       throw responseContaktly.error.v!;
     }
+
     return ApiSendMailResponse()
       ..messageId.v = responseContaktly.result.v!.messageId.v;
   }

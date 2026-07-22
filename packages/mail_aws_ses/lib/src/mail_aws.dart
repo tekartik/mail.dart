@@ -138,6 +138,7 @@ class MailServiceAwsSes with MailServiceMixin implements MailService {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       final decodedJson = jsonDecode(responseBody) as Map;
       final messageId = decodedJson['MessageId'] as String?;
+
       return SendMailResultAwsSes(messageId);
     } else {
       throw Exception(

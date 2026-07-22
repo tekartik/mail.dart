@@ -7,9 +7,13 @@ var _builderInitialized = false;
 void initTkmailAwsSesBuilders() {
   if (!_builderInitialized) {
     _builderInitialized = true;
+
     cvAddConstructor(ApiCredentialsAwsSes.new);
+
     cvAddConstructor(ApiServiceAwsSes.new);
+
     cvAddConstructor(ApiSendMailRequestAwsSes.new);
+
     initTkmailBuilders();
   }
 }
