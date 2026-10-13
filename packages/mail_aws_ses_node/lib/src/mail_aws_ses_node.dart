@@ -83,11 +83,11 @@ class AwsSesMailService with MailServiceMixin implements MailService {
 extension AwsMailRecipientExt on MailRecipient {
   /// Convert to AWS recipient.
   String toAwsRecipient() {
-    if (name == null) {
+    final name = this.name;
+    if (name == null || name.isEmpty) {
       return email;
-    } else {
-      return '${encodeName(name!)} <$email>';
     }
+    return '${encodeName(name)} <$email>';
   }
 }
 
