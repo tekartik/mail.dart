@@ -42,8 +42,8 @@ The shared wire model and client base are described in the
     and `commandContaktlySendEmail`. It does NOT export
     `TkmailClientContaktly` (it exports `TkmailClientAwsSes` instead), so
     import `mail_contaktly.dart` as well when you need the client type.
-  * Never import both `mail_tk_contaklty.dart` and `mail_tk_aws_ses.dart` in
-    the same file: both export a different `ApiCredentialsAwsSes`.
+  * `mail_tk_contaklty.dart` and `mail_tk_aws_ses.dart` export the same
+    `ApiCredentialsAwsSes` class: importing both in a file is fine.
 * Wiring: `TkmailClientContaktly(uri: <the single endpoint uri>, app:
   '<app name>')`, then `TkmailContaktlyMailService(client: client, options:
   TkmailContaktlyServiceOptions(serviceId: ..., encPaths: [...], encode:
@@ -55,8 +55,9 @@ The shared wire model and client base are described in the
   at those paths, in that order, are passed to
   `encode(List<Object?> values)`, whose returned string is sent as the `enc`
   field. Implement `encode` with the signing algorithm the server expects
-  (usually an hmac over the joined values with a shared secret) and keep the
-  secret out of the source.
+  (usually an hmac over the joined values with a shared secret), never an
+  encoding of the secret itself (base64 is readable by anyone who sees the
+  request), and keep the secret out of the source.
 * Each `sendMail` performs two http round trips: a timestamp request
   (`command: 'timestamp'`) whose result is signed, then the send
   (`commandContaktlySendEmail`, `'sendemail'`). The timestamp command
@@ -77,7 +78,8 @@ The shared wire model and client base are described in the
   client (tests, server side).
 * Lifecycle and debugging: reuse one client, `client.close()` when done; set
   `debugTkmailApi = true` before creating it to log the json exchanged (mail
-  content included, so not in production). Inject a fake `package:http`
+  content included, so not in production; an AWS `secretAccessKey` is
+  logged as `***`). Inject a fake `package:http`
   `Client` with `TkmailClientContaktly(uri: ..., app: ..., client: fake)` to
   test without a server.
 
@@ -88,11 +90,16 @@ The shared wire model and client base are described in the
 ```dart
 import 'dart:convert';
 
+import 'package:crypto/crypto.dart';
 import 'package:tekartik_mail_tk/mail_contaktly.dart';
 
-/// Replace with the signature algorithm the endpoint expects.
-String signValues(List<Object?> values, String secret) =>
-    base64Encode(utf8.encode([secret, ...values].join('|')));
+/// Replace with the signature algorithm the endpoint expects (here an HMAC
+/// SHA-256 of the joined values, `package:crypto`): the secret itself never
+/// travels.
+String signValues(List<Object?> values, String secret) => Hmac(
+  sha256,
+  utf8.encode(secret),
+).convert(utf8.encode(values.join('|'))).toString();
 
 MailService buildMailService({
   required Uri uri,

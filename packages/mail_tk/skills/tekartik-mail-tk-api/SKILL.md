@@ -68,8 +68,8 @@ clients live in the `tekartik-mail-tk-aws-ses` and
   whatever the server put in the response, possibly null.
 * Set the top level `debugTkmailApi = true` BEFORE constructing the client
   to print the request uri, the sent json and the received json — the flag
-  is captured at construction time. It logs mail content, keep it off in
-  production.
+  is captured at construction time. It logs mail content (an AWS
+  `secretAccessKey` is replaced by `***`), keep it off in production.
 * Nothing here validates or authenticates: the transport is plain json over
   http. Never put AWS or account credentials in `ApiSendMailRequest` unless
   the endpoint is yours and https (the aws_ses variant does exactly that,

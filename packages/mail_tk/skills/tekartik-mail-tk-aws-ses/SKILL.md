@@ -65,10 +65,10 @@ to SES. The wire model and the `TkmailClient` base are described in the
   through `request.service.v` with `var`, create it with
   `request.service.create({})`, and never name the type.
 * `ApiCredentialsAwsSes` is exported by both `mail_tk_aws_ses.dart` and
-  `mail_tk_contaklty.dart` as two distinct classes; importing both libraries
-  in the same file is ambiguous. Pick one flavour per file.
+  `mail_tk_contaklty.dart`; it is the same class, importing both is fine.
 * Debugging and tests: set `debugTkmailApi = true` before creating the
-  client to log the json, and inject a fake `package:http` `Client` with
+  client to log the json (the `secretAccessKey` is logged as `***`, the
+  mail content in clear: not in production), and inject a fake `package:http` `Client` with
   `TkmailClientAwsSes(uri: ..., client: fakeClient)` to test without a
   server.
 

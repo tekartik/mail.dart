@@ -16,7 +16,29 @@ void _log(Object? message) {
   print(message);
 }
 
-/// The main client
+/// The keys whose value is a secret, never logged.
+const _secretKeys = {'secretAccessKey'};
+
+/// A copy of [value] with the secrets replaced by `***`, for the debug log.
+Object? _redactSecrets(Object? value) {
+  if (value is Map) {
+    return {
+      for (var entry in value.entries)
+        entry.key: _secretKeys.contains(entry.key)
+            ? '***'
+            : _redactSecrets(entry.value),
+    };
+  } else if (value is List) {
+    return value.map(_redactSecrets).toList();
+  }
+  return value;
+}
+
+/// The json over http client of a tkmail endpoint (the base of
+/// `TkmailClientAwsSes` and `TkmailClientContaktly`).
+///
+/// A non 2xx answer throws an `HttpClientException`; [close] also closes the
+/// `client` given to the constructor.
 abstract class TkmailClient {
   /// The uri
   Uri get uri;
@@ -34,9 +56,9 @@ abstract class TkmailClient {
   Future<Map> send(Uri uri, Map request) async {
     var body = jsonEncode(request);
     if (_debug) {
-      // ignore: avoid_print
       _log('send: $uri');
-      _log('      $body');
+      // Never the credentials (the AWS secret of the aws_ses flavour).
+      _log('      ${jsonEncode(_redactSecrets(request))}');
     }
     var resultText = await httpClientRead(
       _client,
