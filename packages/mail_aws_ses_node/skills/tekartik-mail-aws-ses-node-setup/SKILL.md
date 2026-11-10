@@ -5,8 +5,9 @@ description: >-
   SES through tekartik_mail_aws_ses_node: AwsSesMailService,
   AwsSesMailServiceOptions, AwsSesCredentials (accessKeyId, secretAccessKey),
   the package:tekartik_mail_aws_ses_node/mail_aws_ses_node.dart import, the
-  @aws-sdk/client-ses npm requirement, AwsSesException, attachments and the
-  supportAttachments caveat, and picking it over the pure-Dart SES package.
+  @aws-sdk/client-ses npm requirement, AwsSesException, sending
+  attachments (supportAttachments true), and picking it over the pure-Dart
+  SES package.
 ---
 
 # AWS SES on Node (tekartik_mail_aws_ses_node)
@@ -55,11 +56,11 @@ for Node.js — typically a Firebase / cloud function.
   a recipient with a null name is sent as the bare address.
 * Subject, `text` and `html` are sent as UTF-8 SES content. Set at least one
   of `text` / `html`.
-* Attachments caveat: `AwsSesMailService` does NOT override
-  `supportAttachments`, so it reports `false` (from `MailServiceMixin`),
-  yet `sendMail` does forward `message.attachments` to SES as
-  `AwsSesAttachment`. Do not gate attaching on `supportAttachments` with
-  this backend — attach unconditionally, or test the concrete type.
+* Attachments: `supportAttachments` is `true` and `sendMail` forwards
+  `message.attachments` (to, cc and bcc all receive them). With
+  attachments the mail is sent as a raw MIME message: an address or a mime
+  type holding a control character (CR/LF, header injection) is rejected
+  with an `AwsSesException`.
 * Errors: failures surface as `AwsSesException` (from
   `package:tekartik_aws_ses_node/aws_ses_node.dart`), whose `message` holds
   the SES error text. Catch `AwsSesException` only if you declare
@@ -71,7 +72,7 @@ for Node.js — typically a Firebase / cloud function.
 * Testing: there is no fake here. Unit-test your mail-building code against
   a hand written `MailService` (see the `tekartik_mail` package) and keep
   `AwsSesMailService` for a node integration test only. The package's own
-  `dart test` run only covers the recipient encoder.
+  `dart test` run only covers the recipient encoder and `supportAttachments`.
 
 ## Examples
 
@@ -114,7 +115,7 @@ Future<String?> sendWelcome(MailService service, String email) async {
 }
 ```
 
-### Attachments (ignore supportAttachments here)
+### Attachments
 
 ```dart
 import 'dart:convert';
@@ -127,7 +128,7 @@ Future<SendMailResult> sendCsvReport(
   String to,
   String csv,
 ) {
-  // service.supportAttachments is false, yet attachments are sent.
+  // service.supportAttachments is true: the mail is sent as raw MIME.
   return service.sendMail(
     MailMessage(
       from: MailRecipient(email: 'reports@example.com', name: 'Rapports'),

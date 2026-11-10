@@ -50,6 +50,10 @@ class AwsSesMailService with MailServiceMixin implements MailService {
   /// AWS SES mail service.
   AwsSesMailService({required this.options});
 
+  /// Attachments are sent (raw MIME message).
+  @override
+  bool get supportAttachments => true;
+
   @override
   Future<SendMailResult> sendMail(MailMessage message) async {
     var client = _initClient();
