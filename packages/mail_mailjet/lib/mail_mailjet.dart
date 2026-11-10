@@ -1,4 +1,5 @@
-/// Mail service on AWS SES for node js.
+/// Mail service on the Mailjet http api: [MailjetMailService] built on a
+/// [MailjetClient] (api key and secret).
 library;
 
 export 'package:tekartik_mail/mail.dart';

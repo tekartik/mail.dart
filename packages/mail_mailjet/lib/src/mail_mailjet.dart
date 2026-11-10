@@ -5,7 +5,10 @@ import 'package:tekartik_mail/mail.dart';
 import 'package:tekartik_mail/src/mixin.dart';
 import 'package:tekartik_mailjet/mailjet.dart' as mailjet;
 
-/// Reply to not supported yet.
+/// [MailService] sending through Mailjet: `sendMail` throws an
+/// `HttpClientException` when Mailjet answers an error.
+///
+/// Reply to not supported yet (`replyTo` is ignored).
 class MailjetMailService with MailServiceMixin implements MailService {
   /// Mailjet client.
   final mailjet.MailjetClient client;

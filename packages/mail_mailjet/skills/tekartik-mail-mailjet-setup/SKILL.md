@@ -57,8 +57,8 @@ HTTP, so it runs anywhere `package:http` runs (VM, Flutter, server).
   instance `tekartik_mail_aws_ses`) when a reply-to address matters.
 * `sendMail` returns a `SendMailResult` whose `messageId` is the
   `MessageID` of the first recipient of the first message in the Mailjet
-  response. It is null when Mailjet reported an error status for the
-  message, so treat a null `messageId` as a failure to investigate. The
+  response: null for a message without `to` recipient (`cc`/`bcc` only).
+  A message Mailjet refuses makes the whole call throw (see below). The
   concrete result class is not exported, so the raw Mailjet response (per
   recipient `Status`) is only reachable by calling
   `MailjetClient.sendEmail` directly.
